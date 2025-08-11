@@ -1,10 +1,23 @@
 const express = require('express');
+const path = require('path');
+const signupRouter = require('./signup');
+
 const app = express();
-const signupRouter = require('./signup'); // adjust path if needed
 
+// Middleware
 app.use(express.json());
-app.use('/', signupRouter); // Mounts /signup and /signup/check_availability
+app.use(express.static(path.join(__dirname, 'public')));
 
-// ...other app setup...
+// Mount signup router
+app.use('/', signupRouter);
 
-app.listen(3000, () => console.log('Server running'));
+// 404 fallback for unmatched routes (optional)
+app.use((req, res) => {
+  res.status(404).send('404 Not Found');
+});
+
+// Start the server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
+});
