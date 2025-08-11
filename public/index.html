@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mafia Host - Welcome</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    :root {
+      --primary-bg: #181c25;
+      --accent: #7f5af0;
+      --text-light: #fff;
+      --card-bg: rgba(27, 30, 44, 0.95);
+      --btn-gradient: linear-gradient(90deg, #7f5af0 0%, #2cb67d 100%);
+      --neo-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.35);
+    }
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background: var(--primary-bg);
+      color: var(--text-light);
+      font-family: 'Poppins', Arial, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    .snowflake {
+      position: fixed;
+      color: #fff;
+      user-select: none;
+      z-index: 2;
+      pointer-events: none;
+      opacity: 0.8;
+      font-size: 1.3em;
+      animation: fall linear infinite;
+    }
+    @keyframes fall {
+      0% {
+        transform: translateY(-100vh) rotate(0deg);
+        opacity: 0.7;
+      }
+      80% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0.2;
+      }
+    }
+    .neo-bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+      background: radial-gradient(circle at 60% 10%, #7f5af033 0%, transparent 70%),
+                  radial-gradient(circle at 20% 80%, #2cb67d2d 0%, transparent 70%),
+                  radial-gradient(circle at 80% 70%, #ff890633 0%, transparent 70%);
+    }
+    .container {
+      position: relative;
+      z-index: 3;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card {
+      background: var(--card-bg);
+      border-radius: 30px;
+      box-shadow: var(--neo-shadow);
+      padding: 2.5rem 2rem;
+      max-width: 440px;
+      margin: 2rem;
+      text-align: center;
+      backdrop-filter: blur(5px);
+      border: 1.5px solid #22243a;
+      position: relative;
+    }
+    .card h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 1.2rem;
+      color: var(--text-light);
+      text-shadow: 0 1px 24px #7f5af022;
+    }
+    .card p {
+      color: #bfc9dd;
+      font-size: 1.18rem;
+      margin-bottom: 2.5rem;
+      letter-spacing: 0.3px;
+      line-height: 1.7;
+      text-shadow: 0 1px 4px #0005;
+    }
+    .get-started-btn {
+      padding: 1rem 2.8rem;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #fff;
+      background: var(--btn-gradient);
+      border: none;
+      border-radius: 16px;
+      box-shadow: 0 2px 20px 0 #7f5af055;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.18s;
+      margin-top: 0.7rem;
+      letter-spacing: 0.05em;
+      outline: none;
+      position: relative;
+    }
+    .get-started-btn:hover, .get-started-btn:focus {
+      background: linear-gradient(90deg, #2cb67d 0%, #7f5af0 100%);
+      transform: translateY(-3px) scale(1.04);
+      color: #fff;
+    }
+    .get-started-btn i {
+      margin-left: 0.6rem;
+    }
+    .brand {
+      font-family: 'Poppins', Arial, sans-serif;
+      font-size: 1.12rem;
+      letter-spacing: 3px;
+      color: #7f5af0;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+      text-shadow: 0 2px 8px #2cb67d44;
+      text-transform: uppercase;
+      display: block;
+    }
+    @media (max-width: 600px) {
+      .card {
+        max-width: 98vw;
+        padding: 1.5rem 0.5rem;
+      }
+      .card h1 {
+        font-size: 1.38rem;
+      }
+      .card p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="neo-bg"></div>
+  <div class="container">
+    <div class="card">
+      <span class="brand"><i class="fas fa-user-secret"></i> Mafia Host</span>
+      <h1>Unleash the Game Night<br>with <span style="color:#7f5af0;">Mafia Host</span></h1>
+      <p>
+        Welcome to Mafia Host, your modern and secure platform for hosting, managing, and playing Mafia games online.<br>
+        Create, join, and enjoy thrilling game nights with friends or the community &mdash; all for free, all in dark mode, with a touch of neon magic.<br>
+        <strong>Ready to begin?</strong>
+      </p>
+      <button class="get-started-btn" id="getStartedBtn">
+        Get Started <i class="fas fa-arrow-right"></i>
+      </button>
+    </div>
+  </div>
+  <!-- Snowflakes -->
+  <script>
+    // Snowflake characters for variety
+    const snowflakes = ["❄","❅","❆","✻","✼","*"];
+    const snowflakeCount = Math.floor(window.innerWidth / 32) + 12;
+
+    for(let i=0; i<snowflakeCount; i++) {
+      let el = document.createElement('span');
+      el.className = 'snowflake';
+      el.innerHTML = snowflakes[Math.floor(Math.random()*snowflakes.length)];
+      el.style.left = Math.random() * 100 + 'vw';
+      el.style.fontSize = (Math.random() * 1.7 + 0.6) + 'em';
+      el.style.animationDuration = (Math.random() * 5 + 8) + 's';
+      el.style.opacity = Math.random() * 0.6 + 0.25;
+      el.style.animationDelay = (Math.random() * 10) + 's';
+      document.body.appendChild(el);
+    }
+  </script>
+  <script>
+    document.getElementById('getStartedBtn').onclick = function() {
+      window.location.href = "signup.html";
+    }
+  </script>
+</body>
+</html>
