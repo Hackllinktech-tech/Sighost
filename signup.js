@@ -6,16 +6,17 @@ const router = express.Router();
 // Check availability for username/email
 router.post('/signup/check_availability', async (req, res) => {
   const db = new Database();
-  let response = { exists: false };
+  let response = { usernameExists: false, emailExists: false };
+
   if (req.body.email) {
     const email = db.validate(req.body.email);
     const emailCheck = await db.select('users', ['email'], 'email = ?', [email]);
-    if (emailCheck.length > 0) response.exists = true;
+    if (emailCheck.length > 0) response.emailExists = true;
   }
   if (req.body.username) {
     const username = db.validate(req.body.username);
     const usernameCheck = await db.select('users', ['username'], 'username = ?', [username]);
-    if (usernameCheck.length > 0) response.exists = true;
+    if (usernameCheck.length > 0) response.usernameExists = true;
   }
   res.json(response);
 });
